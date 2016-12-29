@@ -7,22 +7,16 @@ class DB
 {
 	/**
 	 * Объект PDO.
-	 * 
-	 * @var object
 	 */
 	public static $dbh = null;
 
 	/**
 	 * "Statement Handle".
-	 * 
-	 * @var object
 	 */
 	public static $sth = null;
 
 	/**
 	 * Выполняемый SQL запрос.
-	 * 
-	 * @var string
 	 */
 	public static $query = '';
 
@@ -47,9 +41,6 @@ class DB
 
 	/**
 	 * Подготовка SQL запроса.
-	 * 
-	 * @param string $query  SQL запрос
-	 * @return string
 	 */
 	private static function _prepareQuery($query)
 	{
@@ -58,8 +49,6 @@ class DB
 
 	/**
 	 * Получение ошибки запросса.
-	 * 
-	 * @return string
 	 */
 	public static function getError()
 	{
@@ -70,9 +59,6 @@ class DB
 	
 	/**
 	 * Возвращает структуру таблицы в виде асативного массива.
-	 * 
-	 * @param string $table
-	 * @return array
 	 */
 	public static function getStructure($table)
 	{
@@ -86,10 +72,6 @@ class DB
 
 	/**
 	 * Добовление в таблицу, в случаи успеха вернет вставленный ID, иначе 0.
-	 * 
-	 * @param string $query SQL запрос
-	 * @param mixed $param  Параметры запроса
-	 * @return int
 	 */
 	public static function add($query, $param = array())
 	{
@@ -102,10 +84,6 @@ class DB
 	
 	/**
 	 * Выполнение запроса.
-	 * 
-	 * @param string $query SQL запрос
-	 * @param mixed $param  Параметры запроса
-	 * @return bool 
 	 */
 	public static function set($query, $param = array())
 	{
@@ -118,11 +96,6 @@ class DB
 	
 	/**
 	 * Получение строки из таблицы.
-	 * 
-	 * @param string $query SQL запрос
-	 * @param mixed $param  Параметры запроса
-	 * @param string $mode  Метод формирования результата (PDO::FETCH_ASSOC, PDO::FETCH_NUM, PDO::FETCH_KEY_PAIR) 
-	 * @return array 
 	 */
 	public static function getRow($query, $param = array(), $mode = PDO::FETCH_ASSOC)
 	{
@@ -137,11 +110,6 @@ class DB
 	
 	/**
 	 * Получение всех строк из таблицы.
-	 * 
-	 * @param string $query SQL запрос
-	 * @param mixed $param  Параметры запроса
-	 * @param string $mode  Метод формирования результата
-	 * @return array 
 	 */
 	public static function getAll($query, $param = array(), $mode = PDO::FETCH_ASSOC)
 	{
@@ -156,8 +124,6 @@ class DB
 
 	/**
 	 * Возвращает потомков из таблицы.
-	 * 
-	 * @return array
 	 */
 	public static function getChilds($sql, $param = array(), $max_livel = 0)
 	{
@@ -173,7 +139,9 @@ class DB
 		}
 	}
 	
-	// Внутренняя рекурсивная функция
+	/**
+	 * Внутренняя рекурсивная функция
+	 */
 	public static function getChildsNode(&$res, $sql, $param, $max_livel, $livel)
 	{
 		$livel++;
@@ -189,11 +157,6 @@ class DB
 
 	/**
 	 * Получение значения.
-	 * 
-	 * @param string $query  SQL запрос
-	 * @param mixed $param   Параметры запроса
-	 * @param mixed $default Возвращаемое значение при пустом результате
-	 * @return mixed 
 	 */
 	public static function getValue($query, $param = array(), $default = null)
 	{
@@ -207,10 +170,6 @@ class DB
 	
 	/**
 	 * Получение столбца таблицы.
-	 * 
-	 * @param string $query SQL запрос
-	 * @param mixed $param  Параметры запроса
-	 * @return array 
 	 */
 	public static function getColumn($query, $param = array())
 	{
@@ -222,8 +181,4 @@ class DB
 
 		return self::$sth->fetchAll(PDO::FETCH_COLUMN);	
 	}
-
-	/**
-	 * @todo написать меотод для KEY_PAIR
-	 */
 }
